@@ -27,7 +27,11 @@ render_field(Data, {Field, Label, Type, Opts}) ->
 	#panel{class=sigma_form_field_wrapper,body=[
 		#label{text=Label},
 		render_form_field(Field, Value, Type, Opts)
-	]}.
+	]};
+render_field(_, '-') ->
+	#hr{};
+render_field(_, Other) ->
+	Other.
 
 render_form_field(Field, Value, textbox, Opts) ->
 	#textbox{id=Field,text=Value,placeholder=proplists:get_value(placeholder, Opts)};
@@ -47,4 +51,10 @@ get_value(Dict, Field) when is_tuple(Dict) andalso element(1,Dict)=:=dict ->
 	case dict:find(Field, Dict) of
 		{ok, Value} -> Value;
 		error -> ""
-	end.
+	end;
+get_value([], _) ->
+	"";
+get_value(undefined, _) ->
+	"";
+get_value(Data, _) ->
+	throw({error,{invalid_data_format, Data}}).

@@ -24,7 +24,7 @@ render_field(Data, {Field, Label, Type}) ->
 
 render_field(Data, {Field, Label, Type, Opts}) ->
 	Value = get_value(Data, Field),
-	#panel{class=sigma_form_field_wrapper,body=[
+	#panel{class=[sigma_form_field_wrapper,'form-group'],body=[
 		#label{text=Label},
 		render_form_field(Field, Value, Type, Opts)
 	]};
@@ -34,11 +34,11 @@ render_field(_, Other) ->
 	Other.
 
 render_form_field(Field, Value, textbox, Opts) ->
-	#textbox{id=Field,text=Value,placeholder=proplists:get_value(placeholder, Opts)};
+	#textbox{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts)};
 render_form_field(Field, Value, textarea, Opts) ->
-	#textarea{id=Field,text=Value,placeholder=proplists:get_value(placeholder, Opts)};
+	#textarea{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts)};
 render_form_field(Field, Value, {dropdown, DDOpts}, _Opts) ->
-	#dropdown{id=Field, value=Value, options=DDOpts}.
+	#dropdown{id=Field, value=Value, class='form-control', options=DDOpts}.
 
 get_value(Data, Field) when is_function(Data, 1) ->
 	Data(Field);

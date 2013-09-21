@@ -38,7 +38,9 @@ render_form_field(Field, Value, textbox, Opts) ->
 render_form_field(Field, Value, textarea, Opts) ->
 	#textarea{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts)};
 render_form_field(Field, Value, {dropdown, DDOpts}, _Opts) ->
-	#dropdown{id=Field, value=Value, class='form-control', options=DDOpts}.
+	#dropdown{id=Field, value=Value, class='form-control', options=DDOpts};
+render_form_field(Field, Value, Type, Opts) ->
+	#textbox{id=Field, text=Value, type=Type, class='form-control',placeholder=proplists:get_value(placeholder, Opts)}.
 
 get_value(Data, Field) when is_function(Data, 1) ->
 	Data(Field);

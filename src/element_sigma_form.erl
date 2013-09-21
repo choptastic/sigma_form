@@ -35,6 +35,8 @@ render_field(_, Other) ->
 
 render_form_field(Field, Value, textbox, Opts) ->
 	#textbox{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts)};
+render_form_field(Field, Value, date, Opts) ->
+	#datepicker_textbox{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts)};
 render_form_field(Field, Value, textarea, Opts) ->
 	#textarea{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts)};
 render_form_field(Field, Value, {dropdown, DDOpts}, _Opts) ->

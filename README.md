@@ -61,8 +61,9 @@ The format for the `fields` attribute is any of the following formats:
 + `Fieldid` will be the ID the generated element, and is also the key of the
   related data in `PlayerData`.
 + `Label` is just the text label for the element
-+ `Type` is either the atoms `textbox`, `textarea`, `password`, or the tuple
-  `{dropdown, DropdownOptions}`
++ `Type` is either the atoms `textbox`, `textarea`, `password`, `date`, or the
+  tuple `{dropdown, DropdownOptions}`, or any acceptable value for an HTML
+  input's `type` attribute
 + `Options`, is a proplist, which currently supports one option: `{placeholder,
   "Placeholder Text"}` and which only works on textboxes and textareas.
 + `DropdownOptions` is a list of options which are acceptable as the `options`

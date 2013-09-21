@@ -9,8 +9,8 @@
 
 reflect() -> record_info(fields, sigma_form).
 
-render_element(_SF = #sigma_form{class=Class, html_id=HtmlID, data=Data, fields=Fields}) ->
-	Body = [render_field(Data, F) || F <- Fields],
+render_element(#sigma_form{class=Class, html_id=HtmlID, data=Data, fields=Fields}) ->
+	Body = [render_field(Data, F) || F <- lists:flatten(Fields)],
 	wf_tags:emit_tag('div',Body, [
 		{class,Class},
 		{id, HtmlID}

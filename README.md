@@ -69,6 +69,10 @@ The format for the `fields` attribute is any of the following formats:
 + `DropdownOptions` is a list of options which are acceptable as the `options`
   attribute of the [#dropdown](http://nitrogenproject.com/doc/elements/dropdown.html)
 
+**Note:** If any item in the `fields` attribute does not match one of the above
+formats, the value is passed through anyway.  This allows you to include more
+elaborate controls or breaks that include just text, or anything in between.
+
 **Note** `sigma_form` does not do any postbacks, buttons, or validations.
 That is up to you.
 

@@ -62,12 +62,17 @@ The format for the `fields` attribute is any of the following formats:
 + `Fieldid` will be the ID the generated element, and is also the key of the
   related data in the `data` attribute.
 + `Label` is just the text label for the element
-+ `Type` is either the atoms `textbox`, `textarea`, `password`, or the tuple
-  `{dropdown, DropdownOptions}`
++ `Type` is either the atoms `textbox`, `textarea`, `password`, `date`, or the
+  tuple `{dropdown, DropdownOptions}`, or any acceptable value for an HTML
+  input's `type` attribute
 + `Options`, is a proplist, which currently supports one option: `{placeholder,
   "Placeholder Text"}` and which only works on textboxes and textareas.
 + `DropdownOptions` is a list of options which are acceptable as the `options`
   attribute of the [#dropdown](http://nitrogenproject.com/doc/elements/dropdown.html)
+
+**Note:** If any item in the `fields` attribute does not match one of the above
+formats, the value is passed through anyway.  This allows you to include more
+elaborate controls or breaks that include just text, or anything in between.
 
 **Note** `sigma_form` does not do any postbacks, buttons, or validations.
 That is up to you.

@@ -9,8 +9,8 @@
 
 reflect() -> record_info(fields, sigma_form).
 
-render_element(_SF = #sigma_form{class=Class, html_id=HtmlID, data=Data, fields=Fields}) ->
-	Body = [render_field(Data, F) || F <- Fields],
+render_element(#sigma_form{class=Class, html_id=HtmlID, data=Data, fields=Fields}) ->
+	Body = [render_field(Data, F) || F <- lists:flatten(Fields)],
 	wf_tags:emit_tag('div',Body, [
 		{class,Class},
 		{id, HtmlID}
@@ -24,7 +24,7 @@ render_field(Data, {Field, Label, Type}) ->
 
 render_field(Data, {Field, Label, Type, Opts}) ->
 	Value = get_value(Data, Field),
-	#panel{class=sigma_form_field_wrapper,body=[
+	#panel{class=[sigma_form_field_wrapper,'form-group'],body=[
 		#label{text=Label},
 		render_form_field(Field, Value, Type, Opts)
 	]};
@@ -34,11 +34,15 @@ render_field(_, Other) ->
 	Other.
 
 render_form_field(Field, Value, textbox, Opts) ->
-	#textbox{id=Field,text=Value,placeholder=proplists:get_value(placeholder, Opts)};
+	#textbox{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts)};
+render_form_field(Field, Value, date, Opts) ->
+	#datepicker_textbox{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts)};
 render_form_field(Field, Value, textarea, Opts) ->
-	#textarea{id=Field,text=Value,placeholder=proplists:get_value(placeholder, Opts)};
+	#textarea{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts)};
 render_form_field(Field, Value, {dropdown, DDOpts}, _Opts) ->
-	#dropdown{id=Field, value=Value, options=DDOpts}.
+	#dropdown{id=Field, value=Value, class='form-control', options=DDOpts};
+render_form_field(Field, Value, Type, Opts) ->
+	#textbox{id=Field, text=Value, type=Type, class='form-control',placeholder=proplists:get_value(placeholder, Opts)}.
 
 get_value(Data, Field) when is_function(Data, 1) ->
 	Data(Field);

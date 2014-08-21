@@ -25,7 +25,8 @@ render_field(Data, {Field, Label, Type}) ->
 
 render_field(Data, {Field, Label, Type, Opts}) ->
 	Value = get_value(Data, Field),
-	#panel{class=[sigma_form_field_wrapper,'form-group'],body=[
+	FieldClass = <<"sigma_form_field_",(wf:to_binary(Field))/binary>>,
+	#panel{class=[sigma_form_field_wrapper,'form-group', FieldClass],body=[
 		#label{text=Label},
 		render_form_field(Field, Value, Type, Opts)
 	]};

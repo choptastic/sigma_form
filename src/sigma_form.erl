@@ -1,4 +1,4 @@
--module (element_sigma_form).
+-module (sigma_form).
 -include_lib("nitrogen_core/include/wf.hrl").
 -include_lib("sigma_yesno/include/records.hrl").
 -include("records.hrl").

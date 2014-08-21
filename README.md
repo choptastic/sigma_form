@@ -94,7 +94,7 @@ the rows dynamically.
 
 ### Quickly Get Field Name
 
-There is a function `element_sigma_form:get_label(Fields, FieldName)` where
+There is a function `sigma_form:get_label(FieldName, Fields)` where
 `Fields` is the same as the `Fields` value above and `FieldName` is the ID of
 the field. It will return the label associated.  It's mostly a shortcut for
 `lists:keyfind/3`, but with a more specific naming semantics meant to

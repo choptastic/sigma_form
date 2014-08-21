@@ -1,1 +1,1 @@
--record(sigma_form, {?ELEMENT_BASE(element_sigma_form), delegate, tag, data=undefined, fields=[] }).
+-record(sigma_form, {?ELEMENT_BASE(sigma_form), delegate, tag, data=undefined, fields=[] }).

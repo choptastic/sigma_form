@@ -66,11 +66,14 @@ The format for the `fields` attribute is any of the following formats:
     related data in the `data` attribute.
   + `Label` is just the text label for the element
   + `Type` is either the atoms `textbox`, `textarea`, `password`, `date`,
-    `yesno` or the tuples `{dropdown, DropdownOptions}` or 
+    `yesno` or the following tuples `{dropdown, DropdownOptions}` or 
 	`{yesno, YesText, NoText}` or any acceptable value for an HTML input's
 	`type` attribute
-  + `Options`, is a proplist, which currently supports one option: `{placeholder,
-    "Placeholder Text"}` and which only works on textboxes and textareas.
+  + `Options`, is a proplist, which for most elements, only currently supports
+    one option: `{placeholder, "Placeholder Text"}` and which only works on
+	textboxes and textareas. For `date`, the `Options` proplist will be passed
+	to the options attribute of the
+	[`#datepicker_textbox`](http://nitrogenproject.com/doc/elements/datepicker_textbox.html)
   + `DropdownOptions` is a list of options which are acceptable as the `options`
     attribute of the [#dropdown](http://nitrogenproject.com/doc/elements/dropdown.html)
 

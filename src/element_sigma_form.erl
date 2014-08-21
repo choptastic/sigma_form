@@ -1,5 +1,6 @@
 -module (element_sigma_form).
 -include_lib("nitrogen_core/include/wf.hrl").
+-include_lib("sigma_yesno/include/records.hrl").
 -include("records.hrl").
 
 -export([
@@ -41,6 +42,10 @@ render_form_field(Field, Value, textarea, Opts) ->
 	#textarea{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts)};
 render_form_field(Field, Value, {dropdown, DDOpts}, _Opts) ->
 	#dropdown{id=Field, value=Value, class='form-control', options=DDOpts};
+render_form_field(Field, Value, yesno, Opts) ->
+	render_form_field(Field, Value, {yesno, "Yes", "No"}, Opts);
+render_form_field(Field, Value, {yesno, YesText, NoText}, _Opts) ->
+	#yesno{id=Field, value=Value, class='form-control', yes_text=YesText, no_text=NoText};
 render_form_field(Field, Value, Type, Opts) ->
 	#textbox{id=Field, text=Value, type=Type, class='form-control',placeholder=proplists:get_value(placeholder, Opts)}.
 

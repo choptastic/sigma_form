@@ -84,6 +84,22 @@ elaborate controls or breaks that include just text, or anything in between.
 **Note** `sigma_form` does not do any postbacks, buttons, or validations.
 That is up to you.
 
+## Miscellaneous Perks
+
+### Class names
+Each row will be wrapped in a div with a class set to
+`sigma_form_field_FIELDNAME` where `FIELDNAME` is the ID of the field. This
+will allow you to easily target the rows or elements with CSS or to hide/show
+the rows dynamically.
+
+### Quickly Get Field Name
+
+There is a function `element_sigma_form:get_label(Fields, FieldName)` where
+`Fields` is the same as the `Fields` value above and `FieldName` is the ID of
+the field. It will return the label associated.  It's mostly a shortcut for
+`lists:keyfind/3`, but with a more specific naming semantics meant to
+accommodate `sigma_form`
+
 ## License
 
 Copyright (c) 2014, [Jesse Gumm](http://sigma-star.com/page/jesse)

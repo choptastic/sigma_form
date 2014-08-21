@@ -5,7 +5,8 @@
 
 -export([
 	reflect/0,
-	render_element/1
+	render_element/1,
+	get_label/2
 ]).
 
 reflect() -> record_info(fields, sigma_form).
@@ -68,3 +69,9 @@ get_value(undefined, _) ->
 	"";
 get_value(Data, _) ->
 	throw({error,{invalid_data_format, Data}}).
+
+get_label(Field, Fields) ->
+	case lists:keyfind(Field, 1, Fields) of
+		false -> {not_found, Field};
+		Rec -> element(2, Rec)
+	end.

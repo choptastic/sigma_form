@@ -65,9 +65,10 @@ The format for the `fields` attribute is any of the following formats:
   + `Fieldid` will be the ID the generated element, and is also the key of the
     related data in the `data` attribute.
   + `Label` is just the text label for the element
-  + `Type` is either the atoms `textbox`, `textarea`, `password`, `date`, or the
-    tuple `{dropdown, DropdownOptions}`, or any acceptable value for an HTML
-    input's `type` attribute
+  + `Type` is either the atoms `textbox`, `textarea`, `password`, `date`,
+    `yesno` or the tuples `{dropdown, DropdownOptions}` or 
+	`{yesno, YesText, NoText}` or any acceptable value for an HTML input's
+	`type` attribute
   + `Options`, is a proplist, which currently supports one option: `{placeholder,
     "Placeholder Text"}` and which only works on textboxes and textareas.
   + `DropdownOptions` is a list of options which are acceptable as the `options`
@@ -82,7 +83,7 @@ That is up to you.
 
 ## License
 
-Copyright (c) 2013, [Jesse Gumm](http://sigma-star.com/page/jesse)
+Copyright (c) 2014, [Jesse Gumm](http://sigma-star.com/page/jesse)
 ([@jessegumm](http://twitter.com/jessegumm))
 
 MIT License

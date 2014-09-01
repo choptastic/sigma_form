@@ -1,6 +1,6 @@
 # sigma_form
 
-A simple form generator plugin element for the [Nitrogen Web Framework](http://nitrogenoproject.com)
+A simple form generator plugin element for the [Nitrogen Web Framework](http://nitrogenproject.com)
 
 ## Installing into a Nitrogen Application
 

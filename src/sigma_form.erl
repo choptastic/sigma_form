@@ -6,7 +6,9 @@
 -export([
 	reflect/0,
 	render_element/1,
-	get_label/2
+	get_label/2,
+	wrapper_class/1,
+	wrapper_selector/1
 ]).
 
 reflect() -> record_info(fields, sigma_form).
@@ -38,6 +40,9 @@ render_field(_, Other) ->
 
 wrapper_class(Field) ->
 	<<"sigma_form_field_",(wf:to_binary(Field))/binary>>.
+
+wrapper_selector(Field) ->
+	<<".",(wrapper_class(Field))/binary>>.
 
 render_form_field(Field, Value, textbox, Opts) ->
 	#textbox{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts)};

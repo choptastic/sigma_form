@@ -14,11 +14,20 @@
 reflect() -> record_info(fields, sigma_form).
 
 render_element(#sigma_form{class=Class, html_id=HtmlID, data=Data, fields=Fields}) ->
-	Body = [render_field(Data, F) || F <- lists:flatten(Fields)],
+	Body = render_fields(Data, Fields),
 	wf_tags:emit_tag('div',Body, [
 		{class,Class},
 		{id, HtmlID}
 	]).
+
+render_fields(Data, Fields) ->
+	[render_field(Data, F) || F <- lists:flatten(Fields)].
+
+render_field(Data, #inline_group{header=Header, fields=Fields, class=Class}) ->
+    #panel{class=[sigma_form_inline_group, 'form-inline', Class], body=[
+        Header,
+        render_fields(Data, Fields)
+    ]};
 
 render_field(Data, {Field, Label}) ->
 	render_field(Data, {Field, Label, textbox});

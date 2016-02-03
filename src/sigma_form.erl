@@ -63,12 +63,21 @@ render_form_field(Field, Value, dropdown, DDOpts) ->
 	render_form_field(Field, Value, {dropdown, DDOpts}, []);
 render_form_field(Field, Value, {dropdown, DDOpts}, _Opts) ->
 	#dropdown{id=Field, value=Value, class='form-control', options=DDOpts};
+render_form_field(Field, Value, {year, Min, Max}, _Opts) ->
+    #dropdown{id=Field, value=Value, class='form-control', options=make_year_options(Min, Max)};
 render_form_field(Field, Value, yesno, Opts) ->
 	render_form_field(Field, Value, {yesno, "Yes", "No"}, Opts);
 render_form_field(Field, Value, {yesno, YesText, NoText}, _Opts) ->
 	#yesno{id=Field, value=Value, class='form-control', yes_text=YesText, no_text=NoText};
 render_form_field(Field, Value, Type, Opts) ->
 	#textbox{id=Field, text=Value, type=Type, class='form-control',placeholder=proplists:get_value(placeholder, Opts)}.
+
+make_year_options(now, Max) ->
+    make_year_options(element(3, date()), Max);
+make_year_options(Min, now) ->
+    make_year_options(Min, element(3, date()));
+make_year_options(Min, Max) when is_integer(Min), is_integer(Max), Min=<Max ->
+    [{Y,Y} || Y <- lists:seq(Min,Max)].
 
 get_value(Data, Field) when is_function(Data, 1) ->
 	Data(Field);

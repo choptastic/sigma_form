@@ -77,7 +77,9 @@ make_year_options(now, Max) ->
 make_year_options(Min, now) ->
     make_year_options(Min, element(3, date()));
 make_year_options(Min, Max) when is_integer(Min), is_integer(Max), Min=<Max ->
-    [{Y,Y} || Y <- lists:seq(Min,Max)].
+    [{Y,Y} || Y <- lists:seq(Min,Max)];
+make_year_options(Min, Max) when is_integer(Min), is_integer(Max), Min>Max ->
+    lists:reverse(make_year_options(Max, Min)).
 
 get_value(Data, Field) when is_function(Data, 1) ->
 	Data(Field);

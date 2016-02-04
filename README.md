@@ -48,18 +48,18 @@ Then add the following includes into any module requiring the form
 The `data` attribute can be any of the following:
   + A [proplist](http://www.erlang.org/doc/man/proplists.html) containing the data.
   + A [dict](http://www.erlang.org/doc/man/dict.html) containing the data.
+  + A [map](http://www.erlang.org/doc/man/map.html) containing the data.
   + A function with arity 1. This function will be called for each field as
     `LookupFun(FieldName)`. For example, this could be used to retrieve a
     single field value from a database.
-  + With the release of Erlang R17, it will support
-    [maps](https://github.com/psyeugenic/eep/blob/egil/maps/eeps/eep-0043.md).
 
 The format for the `fields` attribute is any of the following formats:
 
 ```erlang
 	{Fieldid, Label},
 	{Fieldid, Label, Type},
-	{Fieldid, Label, Type, Options}
+	{Fieldid, Label, Type, Options},
+    #inline_group{header=HeaderBody, fields=Fields}
 ```
 
   + `Fieldid` will be the ID the generated element, and is also the key of the
@@ -76,6 +76,8 @@ The format for the `fields` attribute is any of the following formats:
 	[`#datepicker_textbox`](http://nitrogenproject.com/doc/elements/datepicker_textbox.html)
   + `DropdownOptions` is a list of options which are acceptable as the `options`
     attribute of the [#dropdown](http://nitrogenproject.com/doc/elements/dropdown.html)
+  + `#inline_group{}` as a field will initiate some tweaks to allow for an
+    inline-group of element for use with bootstrap.
 
 **Note:** If any item in the `fields` attribute does not match one of the above
 formats, the value is passed through anyway.  This allows you to include more

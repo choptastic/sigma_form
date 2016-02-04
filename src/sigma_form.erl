@@ -74,16 +74,16 @@ render_form_field(Field, Value, Type, Opts) ->
 	#textbox{id=Field, text=Value, type=Type, class='form-control',placeholder=proplists:get_value(placeholder, Opts)}.
 
 make_year_options(now, Max) ->
-    make_year_options(element(3, date()), Max);
+    make_year_options(element(1, date()), Max);
 make_year_options(Min, now) ->
-    make_year_options(Min, element(3, date()));
+    make_year_options(Min, element(1, date()));
 make_year_options(Min, Max) when is_integer(Min), is_integer(Max), Min=<Max ->
     [{Y,Y} || Y <- lists:seq(Min,Max)];
 make_year_options(Min, Max) when is_integer(Min), is_integer(Max), Min>Max ->
     lists:reverse(make_year_options(Max, Min)).
 
 get_value(Data, Field) when ?IS_MAP(Data) ->
-    ?MAPS_GET(Data, Field, "");
+    ?MAPS_GET(Field, Data, "");
 get_value(Data, Field) when is_function(Data, 1) ->
 	Data(Field);
 get_value([{_,_}|_]=Data, Field) ->

@@ -2,6 +2,7 @@
 -include_lib("nitrogen_core/include/wf.hrl").
 -include_lib("sigma_yesno/include/records.hrl").
 -include("records.hrl").
+-include("compat.hrl").
 
 -export([
 	reflect/0,
@@ -81,11 +82,8 @@ make_year_options(Min, Max) when is_integer(Min), is_integer(Max), Min=<Max ->
 make_year_options(Min, Max) when is_integer(Min), is_integer(Max), Min>Max ->
     lists:reverse(make_year_options(Max, Min)).
 
-get_value(Data, Field) when is_map(Data) ->
-    case maps:is_key(Field, Data) of
-        true -> maps:get(Field, Data);
-        false -> ""
-    end;
+get_value(Data, Field) when ?IS_MAP(Data) ->
+    ?MAPS_GET(Data, Field, "");
 get_value(Data, Field) when is_function(Data, 1) ->
 	Data(Field);
 get_value([{_,_}|_]=Data, Field) ->

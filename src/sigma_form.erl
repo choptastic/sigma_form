@@ -1,6 +1,7 @@
 -module (sigma_form).
 -include_lib("nitrogen_core/include/wf.hrl").
 -include_lib("sigma_yesno/include/records.hrl").
+-include_lib("time_dropdown/include/records.hrl").
 -include("records.hrl").
 -include("compat.hrl").
 
@@ -66,6 +67,13 @@ render_form_field(Field, Value, {dropdown, DDOpts}, _Opts) ->
 	#dropdown{id=Field, value=Value, class='form-control', options=DDOpts};
 render_form_field(Field, Value, {year, Min, Max}, _Opts) ->
     #dropdown{id=Field, value=Value, class='form-control', options=make_year_options(Min, Max)};
+render_form_field(Field, Value, time, Opts) ->
+    render_form_field(Field, Value, {time, "12am", "11:59pm"}, Opts);
+render_form_field(Field, Value, {time, From, To}, Opts) ->
+    Interval = proplists:get_value(interval, Opts, 60),
+    Format = proplists:get_value(format, Opts, "g:ia"),
+    IntervalType = proplists:get_value(interval_type, Opts, minutes),
+    #time_dropdown{id=Field, value=Value, class='form-control', from=From, to=To, interval=Interval, format=Format, interval_type=IntervalType};
 render_form_field(Field, Value, yesno, Opts) ->
 	render_form_field(Field, Value, {yesno, "Yes", "No"}, Opts);
 render_form_field(Field, Value, {yesno, YesText, NoText}, _Opts) ->

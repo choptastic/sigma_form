@@ -60,7 +60,9 @@ render_form_field(Field, Value, textbox, Opts) ->
 render_form_field(Field, Value, date, Opts) ->
 	#datepicker_textbox{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts), options=Opts};
 render_form_field(Field, Value, textarea, Opts) ->
-	#textarea{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts)};
+    Rows = proplists:get_value(rows, Opts, undefined),
+    Cols = proplists:get_value(columns, Opts, undefined),
+	#textarea{id=Field,text=Value,class='form-control', rows=Rows, columns=Cols, placeholder=proplists:get_value(placeholder, Opts)};
 render_form_field(Field, Value, dropdown, DDOpts) ->
 	render_form_field(Field, Value, {dropdown, DDOpts}, []);
 render_form_field(Field, Value, {dropdown, DDOpts}, _Opts) ->

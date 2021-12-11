@@ -66,8 +66,8 @@ The format for the `fields` attribute is any of the following formats:
     related data in the `data` attribute.
   + `Label` is just the text label for the element
   + `Type` is either the atoms `textbox`, `textarea`, `password`, `date`,
-    `yesno` or the following tuples `{dropdown, DropdownOptions}` or 
-	`{yesno, YesText, NoText}` or any acceptable value for an HTML input's
+    `date_dropdown`, `yesno` or the following tuples `{dropdown, DropdownOptions}`
+    or `{yesno, YesText, NoText}` or any acceptable value for an HTML input's
 	`type` attribute
   + `Options`, is a proplist, which for most elements, only currently supports
     one option: `{placeholder, "Placeholder Text"}` and which only works on

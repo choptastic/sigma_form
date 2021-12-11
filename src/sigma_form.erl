@@ -59,6 +59,9 @@ render_form_field(Field, Value, textbox, Opts) ->
 	#textbox{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts)};
 render_form_field(Field, Value, date, Opts) ->
 	#datepicker_textbox{id=Field,text=Value,class='form-control',placeholder=proplists:get_value(placeholder, Opts), options=Opts};
+render_form_field(Field, Value, date_dropdown, Opts) ->
+    Format = proplists:get_value(format, Opts, ymd),
+    #date_dropdown{id=Field, value=Value, class='form-control', format=Format};
 render_form_field(Field, Value, textarea, Opts) ->
     Rows = proplists:get_value(rows, Opts, undefined),
     Cols = proplists:get_value(columns, Opts, undefined),
